@@ -171,13 +171,13 @@
     <div class="form-group row">
         <label for="inputUnitPrice" class="col-sm-2 col-form-label">Unit Price</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputUnitPrice" placeholder="Rs.1000.00">
+            <input name="unitPrice" type="text" class="form-control" id="inputUnitPrice" placeholder="Rs.1000.00">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputQty" class="col-sm-2 col-form-label">Quantity</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputQty" placeholder="10">
+            <input name="qty" type="text" class="form-control" id="inputQty" placeholder="10">
         </div>
     </div>
     <div>
@@ -255,6 +255,25 @@
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
-<script src="js/order.js"></script>
+<script>
+    $('#btnOrderProceed').click(
+        function () {
+            var orderFormData = $("#formAddOrder").serialize();
+            $.ajax(
+                {
+                    url: "add-order.php",
+                    method: "POST",
+                    async: true,
+                    data: orderFormData
+                }
+            ).done(
+                function (res) {
+                    alert(res);
+                }
+            )
+        }
+    );
+
+</script>
 </body>
 </html>

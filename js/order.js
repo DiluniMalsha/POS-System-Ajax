@@ -1,12 +1,12 @@
 $("#btnOrderProceed").click(
     function () {
-        var orderFormData = $("#formAddOrder").serializeArray();
+        var orderFormData = $("#formAddOrder").serialize();
         $.ajax(
             {
                 url: "add-order.php",
                 method: "POST",
                 async: true,
-                data: customerFormData
+                data: orderFormData
             }
         ).done(
             function (res) {
