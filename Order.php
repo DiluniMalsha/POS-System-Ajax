@@ -181,13 +181,13 @@
         </div>
     </div>
     <div>
-        <button type="button" class="btn btn-primary" style="margin-left: 90%">
+        <button type="button" class="btn btn-primary" style="margin-left: 90%" onclick="addToTable()">
             Add
         </button>
     </div>
 </div>
 </form>
-<table class="table table-hover"style="margin: 1%;width: 46%" id="itemTable">
+<table class="table table-hover" style="margin: 1%;width: 46%" id="itemTable">
     <thead class="thead-light">
     <tr>
 
@@ -200,33 +200,6 @@
     </tr>
     </thead>
     <tbody>
-    <!--<tr>
-        <th scope="row">I-001</th>
-        <td>School Bag</td>
-        <td>Rs.12000.00</td>
-        <td>01</td>
-        <td>Rs.12000.00</td>
-    </tr>
-    <tr>
-        <th scope="row">I-001</th>
-        <td>School Bag</td>
-        <td>Rs.12000.00</td>
-        <td>01</td>
-        <td>Rs.12000.00</td>
-    </tr>
-    <tr>
-        <th scope="row">I-001</th>
-        <td>School Bag</td>
-        <td>Rs.12000.00</td>
-        <td>01</td>
-        <td>Rs.12000.00</td>
-    </tr>-->
-    <tr style="color: red">
-        <td colspan="4" style="text-align: right">
-            <b>Total</b>
-        </td>
-        <td><b>Rs.36000.00</b></td>
-    </tr>
     </tbody>
 </table>
 
@@ -234,15 +207,15 @@
     <div class="row">
         <div class="col-lg-4">
             <label class="lbl">Total : Rs.</label>
-            <input type="text">
+            <input type="text" id="txtTotal">
         </div>
         <div class="col-lg-4">
             <label class="lbl">Discount : Rs.</label>
-            <input type="text">
+            <input type="text" id="txtDiscount">
         </div>
         <div class="col-lg-4">
             <label class="lbl">Sub Total : Rs.</label>
-            <input type="text">
+            <input type="text" id="txtSubTotal">
         </div>
     </div>
 </div>
@@ -273,6 +246,37 @@
             )
         }
     );
+
+    function addToTable() {
+        var code = $("#inputItemCode").val();
+        var name = $("#inputItemName").val();
+        var price = $("#inputUnitPrice").val();
+        var priceInt=parseInt(price);
+        var qty = $("#inputQty").val();
+        var qtyInt=parseInt(qty);
+        var total = priceInt*qtyInt;
+
+        $("#itemTable").append("<tr>" +
+            "<td>"+code+"</td>" +
+            "<td>"+name+"</td>" +
+            "<td>"+price+"</td>" +
+            "<td>"+qty+"</td>" +
+            "<td>"+total+"</td>" +
+            "</tr>");
+        
+        var finalTotal=parseInt($("#txtTotal").val());
+        var newFinalTotal=total+finalTotal;
+        $("#txtTotal").(newFinalTotal);
+        $("#txtSubTotal").val(newFinalTotal);
+
+    }
+
+    $("#txtDiscount").change(function () {
+        var finalTotal=parseInt($("#txtTotal").val());
+        var discount=parseInt($("#txtDiscount").val());
+        var newFinalTotal=finalTotal-((finalTotal*discount)/100);
+        $("#txtSubTotal").val(newFinalTotal);
+    })
 
 </script>
 </body>
